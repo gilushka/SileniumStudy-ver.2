@@ -15,22 +15,14 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 
-public class task01Test {
+public class Task01Test extends BaseTest {
     WebDriver driver;
-    String baseURL;
+    String baseUrl;
 
-    @Before
-    public void beforeTest(){
-        System.setProperty("webdriver.chrome.driver", "drv/chromedriver.exe");
-        baseURL = "http://www.sberbank.ru/ru/person";
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(baseURL);
 
-    }
     @Test
-    public void testMetod(){
+    public void testMethod() throws Exception{
+        driver.get(baseUrl);
         Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
         driver.findElement(By.xpath("//*[@class=\"alt-menu-mid\"]/ul/li[5]/a")).click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class,'header_more_nav')]//*[contains(text(), 'Страхование путешественников')]")))).click(); //Явное ожидание видимости элемента
@@ -88,27 +80,24 @@ public class task01Test {
 
         By by = By.xpath("//div[contains(@class,'b-form-center-pos')]/div[contains(text(),'Заполнены не все обязательные поля')]");
         Assert.assertEquals(true, isElementPresent(by));
-        private boolean isElementPresent(By by) {
-            try{
-                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-                return driver.findElement(by).isDisplayed();
-            }catch (Exception e){
-                return false;
-            }finally {
-                driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            }
-        }
+
 
     }
 
-     public void fillField(By locator, String value){
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(value);
-    }
+//    public void fillField(By locator, String value){
+//        driver.findElement(locator).clear();
+//        driver.findElement(locator).sendKeys(value);
+//    }
 
-    @After
-    public void afterTest(){
-        driver.quit();
+//    public boolean isElementPresent(By by) {
+//        try{
+//            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+//            return driver.findElement(by).isDisplayed();
+//        }catch (Exception e){
+//            return false;
+//        }finally {
+//            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//        }
+//    }
 
-    }
 }
