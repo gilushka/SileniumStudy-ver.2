@@ -22,10 +22,12 @@ public class Task01Test extends BaseTest {
     public void testMethod() throws Exception{
         driver.get(baseUrl);
         MainPage mainPage = new MainPage(driver);
-        mainPage.selectMenuItem();
-        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
-        driver.findElement(By.xpath("//*[@class=\"alt-menu-mid\"]/ul/li[5]/a")).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class,'header_more_nav')]//*[contains(text(), 'Страхование путешественников')]")))).click(); //Явное ожидание видимости элемента
+        mainPage.selectMenuItem("Раздел Застраховать себя  и имущество");
+        mainPage.selectInsuranceItem("Страхование путешественников");
+
+//        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+//        driver.findElement(By.xpath("//*[@class=\"alt-menu-mid\"]/ul/li[5]/a")).click();
+//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class,'header_more_nav')]//*[contains(text(), 'Страхование путешественников')]")))).click(); //Явное ожидание видимости элемента
 
 
         WebElement title = driver.findElement(By.xpath("//div[contains(@class,'sbrf-rich-outer')]/h1"));
