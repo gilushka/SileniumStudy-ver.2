@@ -10,19 +10,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.MainPage;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 
 public class Task01Test extends BaseTest {
-    WebDriver driver;
-    String baseUrl;
-
 
     @Test
     public void testMethod() throws Exception{
         driver.get(baseUrl);
+        MainPage mainPage = new MainPage(driver);
+        mainPage.selectMenuItem();
         Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
         driver.findElement(By.xpath("//*[@class=\"alt-menu-mid\"]/ul/li[5]/a")).click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class,'header_more_nav')]//*[contains(text(), 'Страхование путешественников')]")))).click(); //Явное ожидание видимости элемента
@@ -54,7 +54,7 @@ public class Task01Test extends BaseTest {
 
         driver.findElement(By.name("female")).click();
 
-        Assert.assertEquals("19.05.1985", driver.findElement(By.name("birthDate")).getAttribute("value"));
+        Assert.assertEquals("18.06.1985", driver.findElement(By.name("birthDate")).getAttribute("value"));
 
         fillField(By.name("passport_series"), "1825");
         fillField(By.name("passport_number"), "260118");
