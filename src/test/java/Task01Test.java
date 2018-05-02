@@ -1,20 +1,12 @@
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.FirstStepIns;
 import pages.MainPage;
+import pages.SecondStepIns;
+import pages.TravelInsurance;
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-
+import static junit.framework.TestCase.assertTrue;
 
 public class Task01Test extends BaseTest {
 
@@ -25,81 +17,62 @@ public class Task01Test extends BaseTest {
         mainPage.selectMenuItem("Раздел Застраховать себя  и имущество");
         mainPage.selectInsuranceItem("Страхование путешественников");
 
-//        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
-//        driver.findElement(By.xpath("//*[@class=\"alt-menu-mid\"]/ul/li[5]/a")).click();
-//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class,'header_more_nav')]//*[contains(text(), 'Страхование путешественников')]")))).click(); //Явное ожидание видимости элемента
-
-
-        WebElement title = driver.findElement(By.xpath("//div[contains(@class,'sbrf-rich-outer')]/h1"));
-        wait.until(ExpectedConditions.visibilityOf(title));
-        Assert.assertEquals("Страхование путешественников", title.getText());
-
-        driver.findElement(By.xpath("//a//img[contains(@src,'banner-zashita-traveler')]")).click();
+        TravelInsurance TIForm = new TravelInsurance(driver);
+        TIForm.waitAppearence(TIForm.title);
+        Assert.assertEquals("Страхование путешественников", TIForm.title.getText());
+        TIForm.waitAppearence(TIForm.sendAppBtn);
+        TIForm.sendAppBtn.click();
 
         for (String handle : driver.getWindowHandles()){ //Переключение экрана
             driver.switchTo().window(handle);
         }
 
-        driver.findElement(By.xpath("//div[contains(text(),'35')]")).click();
-        driver.findElement(By.xpath("//span[contains(@class,'b-button-block-center')]/span[contains(text(),'Оформить')]")).click();
+        FirstStepIns FSIForm = new FirstStepIns(driver);
+        FSIForm.waitAppearence(FSIForm.select);
+        FSIForm.selectItem("35");
+        FSIForm.sendAppBtn.click();
 
-        fillField(By.name("insured0_surname"), "Ivanov");
-        fillField(By.name("insured0_name"), "Ivan");
-        driver.findElement(By.name("insured0_birthDate")).click();
-        fillField(By.name("insured0_birthDate"), "19.05.1985");
+        SecondStepIns sSIForm = new SecondStepIns(driver);
+        String actualTitle = sSIForm.title.getText();
+        String expectedTitle = "Страхователь";
+        assertTrue(String.format("Заголовок равен [%s]. Ожидалось - [%s]", actualTitle, expectedTitle), actualTitle.contains(expectedTitle));
 
-        fillField(By.name("surname"), "Петров");
-        fillField(By.name("name"), "Петр");
-        fillField(By.name("middlename"), "Петрович");
-        driver.findElement(By.name("birthDate")).click();
-        fillField(By.name("birthDate"), "18.06.1985");
+        sSIForm.fillField("Застрахованные: Фамилия", "Ivanov");
+        sSIForm.fillField("Застрахованные: Имя", "Ivan");
+        sSIForm.fillField("Застрахованные: Дата рождения", "19.05.1985");
 
-        driver.findElement(By.name("female")).click();
+        sSIForm.fillField("Фамилия", "Петров");
+        sSIForm.fillField("Имя", "Петр");
+        sSIForm.fillField("Отчество", "Петрович");
+        sSIForm.fillField("Дата рождения", "18.06.1985");
 
-        Assert.assertEquals("18.06.1985", driver.findElement(By.name("birthDate")).getAttribute("value"));
+        sSIForm.sex.click();
 
-        fillField(By.name("passport_series"), "1825");
-        fillField(By.name("passport_number"), "260118");
-        driver.findElement(By.name("issueDate")).click();
-        fillField(By.name("issueDate"), "09.06.2005");
-        fillField(By.name("issuePlace"), "olala!");
+        sSIForm.fillField("Серия паспорта", "1825");
+        sSIForm.fillField("Номер паспорта", "260118");
+        sSIForm.fillField("Дата выдачи", "09.06.2005");
+        sSIForm.fillField("Место выдачи", "olala!");
 
-        Assert.assertEquals("Ivanov", driver.findElement(By.name("insured0_surname")).getAttribute("value"));
-        Assert.assertEquals("Ivan", driver.findElement(By.name("insured0_name")).getAttribute("value"));
-        Assert.assertEquals("19.05.1985", driver.findElement(By.name("insured0_birthDate")).getAttribute("value"));
+        sSIForm.checkFieldData("Застрахованные: Фамилия","Ivanov");
+        sSIForm.checkFieldData("Застрахованные: Имя", "Ivan");
+        sSIForm.checkFieldData("Застрахованные: Дата рождения","19.05.1985");
 
-        Assert.assertEquals("Петров", driver.findElement(By.name("surname")).getAttribute("value"));
-        Assert.assertEquals("Петр", driver.findElement(By.name("name")).getAttribute("value"));
-        Assert.assertEquals("Петрович", driver.findElement(By.name("middlename")).getAttribute("value"));
-        Assert.assertEquals("19.05.1985", driver.findElement(By.name("birthDate")).getAttribute("value"));
+        sSIForm.checkFieldData("Фамилия","Петров");
+        sSIForm.checkFieldData("Имя","Петр");
+        sSIForm.checkFieldData("Отчество", "Петрович");
+        sSIForm.checkFieldData("Дата рождения","18.06.1985");
 
-        Assert.assertEquals("1825", driver.findElement(By.name("passport_series")).getAttribute("value"));
-        Assert.assertEquals("260118", driver.findElement(By.name("passport_number")).getAttribute("value"));
-        Assert.assertEquals("09.06.2005", driver.findElement(By.name("issueDate")).getAttribute("value"));
-        Assert.assertEquals("olala!", driver.findElement(By.name("issuePlace")).getAttribute("value"));
+        sSIForm.checkFieldData("Серия паспорта","1825");
+        sSIForm.checkFieldData("Номер паспорта","260118");
+        sSIForm.checkFieldData("Дата выдачи", "09.06.2005");
+        sSIForm.checkFieldData("Место выдачи","olala!");
 
-        driver.findElement(By.xpath("//span[@class=\"b-continue-btn\"]")).click();
+        sSIForm.sendButton.click();
 
         By by = By.xpath("//div[contains(@class,'b-form-center-pos')]/div[contains(text(),'Заполнены не все обязательные поля')]");
         Assert.assertEquals(true, isElementPresent(by));
 
 
     }
-
-//    public void fillField(By locator, String value){
-//        driver.findElement(locator).clear();
-//        driver.findElement(locator).sendKeys(value);
-//    }
-
-//    public boolean isElementPresent(By by) {
-//        try{
-//            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//            return driver.findElement(by).isDisplayed();
-//        }catch (Exception e){
-//            return false;
-//        }finally {
-//            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//        }
-//    }
 
 }
