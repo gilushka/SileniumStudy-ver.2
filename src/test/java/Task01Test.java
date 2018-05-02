@@ -5,10 +5,11 @@ import pages.FirstStepIns;
 import pages.MainPage;
 import pages.SecondStepIns;
 import pages.TravelInsurance;
+import steps.BaseSteps;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class Task01Test extends BaseTest {
+public class Task01Test extends BaseSteps {
 
     @Test
     public void testMethod() throws Exception{
