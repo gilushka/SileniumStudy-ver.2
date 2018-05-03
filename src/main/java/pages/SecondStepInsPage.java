@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SecondStepIns extends BasePage {
+public class SecondStepInsPage extends BasePage {
 
     @FindBy(xpath = "//h3[text()='Страхователь']")
     public WebElement title;
@@ -53,7 +53,7 @@ public class SecondStepIns extends BasePage {
     @FindBy(xpath = "//*[contains(@class,'b-continue-btn')]")
     public WebElement sendButton;
 
-    public SecondStepIns(WebDriver driver) {
+    public SecondStepInsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOf(title));

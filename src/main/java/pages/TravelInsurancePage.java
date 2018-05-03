@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,15 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FirstStepIns extends BasePage {
+public class TravelInsurancePage extends BasePage {
+    @FindBy(xpath = "//div[contains(@class,'sbrf-rich-outer')]/h1")
+    public WebElement title;
 
-    @FindBy(xpath = "//div[contains(text(),'35')]")
-    public WebElement select;
-
-    @FindBy(xpath = "//span[contains(@class,'b-button-block-center')]/span[contains(text(),'Оформить')]")
+    @FindBy(xpath = "//a//img[contains(@src,'banner-zashita-traveler')]")
     public WebElement sendAppBtn;
 
-    public FirstStepIns(WebDriver driver){
+    public TravelInsurancePage(WebDriver driver){
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -27,7 +25,4 @@ public class FirstStepIns extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(link));
     }
 
-    public void selectItem(String itemName) {
-        select.findElement(By.xpath("//div[contains(text(),'" + itemName + "')]")).click();
-    }
 }

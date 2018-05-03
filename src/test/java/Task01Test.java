@@ -1,10 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import pages.FirstStepIns;
+import pages.FirstStepInsPage;
 import pages.MainPage;
-import pages.SecondStepIns;
-import pages.TravelInsurance;
+import pages.SecondStepInsPage;
+import pages.TravelInsurancePage;
 import steps.BaseSteps;
 
 import static junit.framework.TestCase.assertTrue;
@@ -18,7 +18,7 @@ public class Task01Test extends BaseSteps {
         mainPage.selectMenuItem("Раздел Застраховать себя  и имущество");
         mainPage.selectInsuranceItem("Страхование путешественников");
 
-        TravelInsurance TIForm = new TravelInsurance(driver);
+        TravelInsurancePage TIForm = new TravelInsurancePage(driver);
         TIForm.waitAppearence(TIForm.title);
         Assert.assertEquals("Страхование путешественников", TIForm.title.getText());
         TIForm.waitAppearence(TIForm.sendAppBtn);
@@ -28,12 +28,12 @@ public class Task01Test extends BaseSteps {
             driver.switchTo().window(handle);
         }
 
-        FirstStepIns FSIForm = new FirstStepIns(driver);
+        FirstStepInsPage FSIForm = new FirstStepInsPage(driver);
         FSIForm.waitAppearence(FSIForm.select);
         FSIForm.selectItem("35");
         FSIForm.sendAppBtn.click();
 
-        SecondStepIns sSIForm = new SecondStepIns(driver);
+        SecondStepInsPage sSIForm = new SecondStepInsPage(driver);
         String actualTitle = sSIForm.title.getText();
         String expectedTitle = "Страхователь";
         assertTrue(String.format("Заголовок равен [%s]. Ожидалось - [%s]", actualTitle, expectedTitle), actualTitle.contains(expectedTitle));
