@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.BaseSteps;
 
 public class FirstStepInsPage extends BasePage {
 
@@ -17,13 +18,12 @@ public class FirstStepInsPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class,'b-button-block-center')]/span[contains(text(),'Оформить')]")
     public WebElement sendAppBtn;
 
-    public FirstStepInsPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+    public FirstStepInsPage(){
+        PageFactory.initElements(BaseSteps.getDriver(), this);
     }
 
     public void waitAppearence(WebElement link){
-        Wait<WebDriver> wait = new WebDriverWait(driver, 5, 1000);
+        Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 5, 1000);
         wait.until(ExpectedConditions.visibilityOf(link));
     }
 

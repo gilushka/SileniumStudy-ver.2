@@ -3,12 +3,25 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import steps.BaseSteps;
 
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 
 public class BasePage {
+
+    public BasePage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
+    }
+
+    public void fillField(WebElement field, String value){
+        field.clear();
+        field.sendKeys(value);
+    }
+
+/*
     WebDriver driver;
 
 
@@ -28,5 +41,5 @@ public class BasePage {
 
     public void checkFillField(String value, WebElement element) {
         assertEquals(value, element.getAttribute("value"));
-    }
+    }*/
 }

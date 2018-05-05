@@ -1,6 +1,7 @@
 package pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import steps.BaseSteps;
 
 public class SecondStepInsPage extends BasePage {
 
@@ -53,11 +55,10 @@ public class SecondStepInsPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class,'b-continue-btn')]")
     public WebElement sendButton;
 
-    public SecondStepInsPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        (new WebDriverWait(driver, 10))
+    public SecondStepInsPage() {
+        PageFactory.initElements(BaseSteps.getDriver(), this);
+        (new WebDriverWait(BaseSteps.getDriver(), 10))
                 .until(ExpectedConditions.visibilityOf(title));
-        this.driver = driver;
     }
 
     public void fillField(String fieldName, String value){
@@ -139,11 +140,10 @@ public class SecondStepInsPage extends BasePage {
         Assert.assertEquals(value, getFillField(field));
     }
 
-
-/*    public void checkFieldErrorMessage(String field, String errorMessage){
-        String xpath = "//*[text()='"+field+"']/..//*[@class='b-text-field-error']";
-        String actualValue = driver.findElement(By.xpath(xpath)).getText();
+    public void checkFieldErrorMessage(String field, String errorMessage){
+        String xpath = "//*[name()='"+field+"']/..//*[@class='b-text-field-error']";
+        String actualValue = BaseSteps.getDriver().findElement(By.xpath(xpath)).getText();
         Assert.assertTrue(String.format("Получено значение [%s]. Ожидалось [%s]", actualValue, errorMessage),
                 actualValue.contains(errorMessage));
-    }*/
+    }
 }
