@@ -1,6 +1,5 @@
 package steps;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import pages.TravelInsurancePage;
 import ru.yandex.qatools.allure.annotations.Step;

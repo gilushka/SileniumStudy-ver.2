@@ -3,7 +3,6 @@ package pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -51,6 +50,9 @@ public class SecondStepInsPage extends BasePage {
 
     @FindBy(name = "issuePlace")
     public WebElement issuePlace;
+
+    @FindBy(xpath = "//div[contains(@class,'b-form-center-pos')]/div[contains(text(),'Заполнены не все обязательные поля')]")
+    public By errorMessage;
 
     @FindBy(xpath = "//*[contains(@class,'b-continue-btn')]")
     public WebElement sendButton;
@@ -138,6 +140,10 @@ public class SecondStepInsPage extends BasePage {
 
     public void checkFieldData(String field, String value){
         Assert.assertEquals(value, getFillField(field));
+    }
+
+    public void checkFieldErrorMessage(){
+        Assert.assertEquals(true, isElementPresent(errorMessage));
     }
 
     public void checkFieldErrorMessage(String field, String errorMessage){

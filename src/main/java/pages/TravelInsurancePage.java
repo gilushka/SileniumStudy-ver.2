@@ -24,5 +24,4 @@ public class TravelInsurancePage extends BasePage {
         Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 5, 1000);
         wait.until(ExpectedConditions.visibilityOf(link));
     }
-
 }

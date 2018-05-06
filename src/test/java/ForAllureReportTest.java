@@ -1,6 +1,4 @@
-import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import ru.yandex.qatools.allure.annotations.Title;
 import steps.*;
 
@@ -45,14 +43,11 @@ public class ForAllureReportTest extends BaseSteps {
 
             secondStepInsSteps.fillFields(testData);
 
-//            testData.put("Телефон","+7 (919) 111-11-11");
             secondStepInsSteps.checkFillFields(testData);
-//            sendAppSteps.checkErrorMessageField("Эл. почта", "Введите корректный email");
 
             secondStepInsSteps.stepSendAppButton();
+            secondStepInsSteps.checkFieldErrorMessage();
 
-            By by = By.xpath("//div[contains(@class,'b-form-center-pos')]/div[contains(text(),'Заполнены не все обязательные поля')]");
-            Assert.assertEquals(true, isElementPresent(by));
         }
 
 }

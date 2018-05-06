@@ -43,9 +43,15 @@ public class SecondStepInsSteps extends BaseSteps {
     public void checkFillFields(HashMap<String, String> fields){
         fields.forEach((k, v)-> checkFillField(k,v));
     }
+
     @Step("Нажатие кнопки - Продолжить")
     public void stepSendAppButton(){
         new SecondStepInsPage().sendButton.click();
+    }
+
+    @Step("Проверка наличия сообщения об ошибке")
+    public void checkFieldErrorMessage(){
+        new SecondStepInsPage().checkFieldErrorMessage();
     }
 
 
