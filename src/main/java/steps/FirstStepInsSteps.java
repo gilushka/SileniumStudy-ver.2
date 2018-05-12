@@ -5,7 +5,7 @@ import pages.FirstStepInsPage;
 import pages.TravelInsurancePage;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class FirstStepInsSteps extends BaseSteps {
+public class FirstStepInsSteps{
 
     @Step("Выбор суммы страховой защиты")
     public void selectValueIns(){

@@ -50,16 +50,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
+                    <includes>
+                        <include>**/CucmberRunner.java</include>
+                    </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>util.AllureReporter</value>
-                        </property>
-                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>

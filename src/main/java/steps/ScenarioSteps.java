@@ -16,7 +16,7 @@ public class ScenarioSteps {
         mainSteps.stepSelectMainMenu(menuItem);
     }
 
-    @When("^выбран вид страхования \"(.+)\"$")
+    @When("^и в пункте меню \"(.+)\" выбран вид страхования \"(.+)\"$")
     public void stepSelectSubMenu(String point, String menuItem){
         mainSteps.stepSelectSubMenu(point, menuItem);
     }
@@ -26,7 +26,7 @@ public class ScenarioSteps {
         travelInsuranceSteps.checkPageTitle(expectedTitle);
     }
 
-    @Then("^переход в раздел оформления страховки \"(.+)\"$")
+    @Then("^переход в раздел оформления страховки$")
     public void stepSendAppButton(){
         travelInsuranceSteps.stepSendAppButton();
     }
@@ -43,7 +43,7 @@ public class ScenarioSteps {
         firstStepInsSteps.selectValueIns();
     }
 
-    @Then("^переход по кнопке \"(.+)\"$")
+    @Then("^переход по кнопке Далее$")
     public void stepFirstSendAppButton(){
         firstStepInsSteps.stepSendAppButton();
     }
@@ -60,13 +60,13 @@ public class ScenarioSteps {
                 .forEach((field, value) -> secondStepInsSteps.checkFillField(field, value));
     }
 
-    @When("^переход по кнопке\"(.+)\"$")
+    @When("^переход на следующий шаг$")
     public void stepSecondSendAppButton(){
         secondStepInsSteps.stepSendAppButton();
     }
 
-    @Then("^на экране присутствует сообщение об ошибке \"(.+)\"$")
-    public void checkErrorMessage(String field, String errorMessage) {
-        secondStepInsSteps.checkErrorMessageField(field, errorMessage);
+    @Then("^на экране присутствует сообщение об ошибке Заполнены не все обязательные поля$")
+    public void checkErrorMessage() {
+        secondStepInsSteps.stepCheckFieldErrorMessage();
     }
 }

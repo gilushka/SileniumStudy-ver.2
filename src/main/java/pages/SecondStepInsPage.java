@@ -142,7 +142,7 @@ public class SecondStepInsPage extends BasePage {
         Assert.assertEquals(value, getFillField(field));
     }
 
-    public void checkFieldErrorMessage(){
+    public void checkOtherFieldErrorMessage(){
         Assert.assertEquals(true, isElementPresent(errorMessage));
     }
 

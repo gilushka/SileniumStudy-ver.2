@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class SecondStepInsSteps extends BaseSteps {
+public class SecondStepInsSteps{
 
 
     @Step("поле {0} заполняется значением {1}")
@@ -50,8 +50,8 @@ public class SecondStepInsSteps extends BaseSteps {
     }
 
     @Step("Проверка наличия сообщения об ошибке")
-    public void checkFieldErrorMessage(){
-        new SecondStepInsPage().checkFieldErrorMessage();
+    public void stepCheckFieldErrorMessage(){
+        new SecondStepInsPage().checkOtherFieldErrorMessage();
     }
 
 
